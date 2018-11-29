@@ -1,6 +1,7 @@
 #!/usr/bin/python
 
 import sys;
+import set_assoc_cache as CacheLib;
 
 argc = len(sys.argv);
 
@@ -11,6 +12,9 @@ if argc < 2:
 	
 file = open(sys.argv[1]);
 
-for line in file:
-	print(line);
+cache = CacheLib.Cache(32, 2);
+
+print(cache.ways);
+print(cache.sets);
+print(cache[0]);
 	
