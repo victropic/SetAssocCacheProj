@@ -1,7 +1,6 @@
-#!/usr/bin/python
-
 import sys;
-import set_assoc_cache as CacheLib;
+import re;
+import set_assoc_cache as Cache;
 
 argc = len(sys.argv);
 
@@ -12,9 +11,16 @@ if argc < 2:
 	
 file = open(sys.argv[1]);
 
-cache = CacheLib.Cache(32, 2);
+cache = Cache.Cache();
 
-print(cache.ways);
-print(cache.sets);
-print(cache[0]);
+for line in file :
+	match = re.match('0x([^:]*): W 0x(.*)', line);
+	if match :
+		print(match.groups());
+	#if len(matches) == 2 :
+	#	print(str(cache[int(matches[1], 16)]));
 	
+print("");
+
+if cache.accesses != 0 :
+	print("miss rate: " + str(cache.misses/cache.accesses));

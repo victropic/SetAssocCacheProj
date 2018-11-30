@@ -10,10 +10,10 @@ class Cache :
 	###    size: size of the entire cache (number of sets * ways * cache line size)
 	###    ways: number of ways
 	###    blockSize: size of a block/cache line in the cache
-	def __init__(self, size, ways, blockSize) :
+	def __init__(self, size = 2048, ways = 2, blockSize = 64) :
 	
 		# check that args are all powers of two
-		if size <= 0 or not checkPowerOfTwo(sets):
+		if size <= 0 or not checkPowerOfTwo(size):
 			size = 2048;
 	
 		if ways <= 0 or not checkPowerOfTwo(ways):
@@ -25,7 +25,7 @@ class Cache :
 		self.ways = ways;
 		self.sets = size//(ways * blockSize);
 		self.blockSize = blockSize;
-		self.setArray = [Set.Set(ways) for _ in range(sets)];
+		self.setArray = [Set.Set(ways) for _ in range(self.sets)];
 		
 		# vars for number of accesses and cache misses to output results
 		self.accesses = 0;
@@ -38,6 +38,8 @@ class Cache :
 		offset = virtualAddr%self.blockSize;
 		setIndex = (virtualAddr//self.blockSize)%self.sets;
 		tag = virtualAddr//(self.blockSize * self.sets);
+		
+		print(tag, setIndex, offset);
 		
 		retval = self.setArray[setIndex].access(tag);
 		
