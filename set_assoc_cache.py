@@ -7,14 +7,14 @@ import set as Set
 class Cache :
 
 	### Constructor
-	###    sets: number of sets
+	###    size: size of the entire cache (number of sets * ways * cache line size)
 	###    ways: number of ways
 	###    blockSize: size of a block/cache line in the cache
-	def __init__(self, sets, ways, blockSize) :
+	def __init__(self, size, ways, blockSize) :
 	
 		# check that args are all powers of two
-		if sets <= 0 or not checkPowerOfTwo(sets):
-			sets = 32;
+		if size <= 0 or not checkPowerOfTwo(sets):
+			size = 2048;
 	
 		if ways <= 0 or not checkPowerOfTwo(ways):
 			ways = 2;
@@ -23,7 +23,7 @@ class Cache :
 			blockSize = 64;
 	
 		self.ways = ways;
-		self.sets = sets//ways;
+		self.sets = size//(ways * blockSize);
 		self.blockSize = blockSize;
 		self.setArray = [Set.Set(ways) for _ in range(sets)];
 		
@@ -41,7 +41,7 @@ class Cache :
 		
 		retval = self.setArray[setIndex].access(tag);
 		
-		self.accesses++;
+		self.accesses += 1;
 		self.misses += 0 if retval['hit'] else 1;
 		
 		return retval['block'];
