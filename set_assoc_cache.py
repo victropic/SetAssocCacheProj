@@ -42,6 +42,7 @@ class Cache :
 		print(tag, setIndex, offset);
 		
 		retval = self.setArray[setIndex].access(tag);
+		print (self.setArray[setIndex].lruQueue);
 		
 		self.accesses += 1;
 		self.misses += 0 if retval['hit'] else 1;

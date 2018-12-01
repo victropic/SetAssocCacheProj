@@ -55,6 +55,7 @@ class Set :
             if self.lruQueue[i] == tag :
                 del self.lruQueue[i];
                 print("removing " + str(tag) + " from queue");
+                break;
 
         print("adding " + str(tag) + " to queue");
         self.lruQueue.insert(0, tag);
