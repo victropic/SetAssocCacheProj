@@ -16,9 +16,8 @@ cache = Cache.Cache();
 for line in file :
 	match = re.match('0x([^:]*): W 0x(.*)', line);
 	if match :
-		print(match.groups());
-	#if len(matches) == 2 :
-	#	print(str(cache[int(matches[1], 16)]));
+		print(str(cache[int(match[1], 16)]));
+		print("");
 	
 print("");
 
