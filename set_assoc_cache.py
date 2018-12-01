@@ -30,6 +30,7 @@ class Cache :
 		# vars for number of accesses and cache misses to output results
 		self.accesses = 0;
 		self.misses = 0;
+		self.nonCompMisses = 0;
 		
 	
 	### Operator overload for indexing (e.g. array[index]) so object can be treated as an array
@@ -39,13 +40,14 @@ class Cache :
 		setIndex = (virtualAddr//self.blockSize)%self.sets;
 		tag = virtualAddr//(self.blockSize * self.sets);
 		
-		print(tag, setIndex, offset);
+		#print(tag, setIndex, offset);
 		
 		retval = self.setArray[setIndex].access(tag);
-		print (self.setArray[setIndex].lruQueue);
+		#print (self.setArray[setIndex].lruQueue);
 		
 		self.accesses += 1;
 		self.misses += 0 if retval['hit'] else 1;
+		self.nonCompMisses += 1 if retval['replace'] else 0;
 		
 		return retval['block'];
 	
