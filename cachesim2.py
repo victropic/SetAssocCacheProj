@@ -45,5 +45,5 @@ while True:
   cache[virtAddr]
     
     
-  if cache.accesses != 0 :
-    print("miss rate: " + str( (cache.misses/cache.accesses)*100 )+"%")
+if cache.accesses != 0 :
+  print("miss rate: " + str( (cache.misses/cache.accesses)*100 )+"%")
